@@ -1,0 +1,14 @@
+import Link from "next/link";
+
+const halamanLogin = () => {
+  
+  return (
+    <div>
+      <h1>Halaman Login</h1>
+      <br />
+      <Link href="/auth/register">Ke Halaman Register</Link>
+    </div>
+  );
+};
+
+export default halamanLogin;
