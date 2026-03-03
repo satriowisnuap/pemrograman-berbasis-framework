@@ -1,3 +1,4 @@
+import styles from "./login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -5,39 +6,24 @@ const HalamanLogin = () => {
     const { push } = useRouter();
     
     const handleLogin = () => {
-        // Simulasi logic login
         console.log("Processing login...");
-        
-        // Navigasi imperatif ke halaman Produk setelah login berhasil
         push('/produk');
     };
 
     return(
-        <div style={{ padding: "20px", maxWidth: "400px", margin: "0 auto" }}>
+        <div className={styles.login}>
             <h1>Halaman Login</h1>
             
-            <div style={{ marginBottom: "20px" }}>
-                {/* Navigasi Imperatif Login ke Product */}
-                <button 
-                    onClick={handleLogin}
-                    style={{ 
-                        padding: "10px 20px", 
-                        backgroundColor: "#0070f3", 
-                        color: "white", 
-                        border: "none", 
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        width: "100%"
-                    }}
-                >
-                    Login (Navigasi ke Product)
-                </button>
-            </div>
+            <button 
+                onClick={handleLogin}
+                className={styles.button}
+            >
+                Login (Navigasi ke Product)
+            </button>
             
-            {/* Navigasi Login ke Halaman Register */}
-            <p style={{ textAlign: "center" }}>
-                Belum punya akun? {" "}
-                <Link href="/auth/register" style={{ color: "#0070f3", textDecoration: "underline" }}>
+            <p>
+                Belum punya akun?{" "}
+                <Link href="/auth/register">
                     Register di sini
                 </Link>
             </p>
