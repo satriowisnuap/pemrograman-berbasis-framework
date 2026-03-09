@@ -11,8 +11,13 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <div>
-      <h1>Praktikum Next.js</h1> <br />
-      <p>Satrio Wisnu Adi Pratama</p>
+      <Head>
+        <title>Praktikum Next.js</title>
+      </Head>
+      <h1>Praktikum Next.js Custom Document & Custom Error Page</h1> <br />
+      <p>Satrio Wisnu Adi Pratama</p> <br />
+      <p>Mahasiswa D4 Pengembangan Web</p>
     </div>
   )
 }
+
