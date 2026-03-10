@@ -1,29 +1,22 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import styles from "@/styles/produk.module.scss";
 
 type ProductType = {
   id: string;
   name: string;
   price: number;
   size: string;
+  category: string;
 };
-const kategori = () => {
-  // const [isLogin, setIsLogin] = useState(false);
-  // const { push } = useRouter();
-  const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   if (!isLogin) {
-  //     push("/auth/login");
-  //   }
-  //   },[]);
+const Kategori = () => {
+  const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
     fetch("/api/produk")
       .then((response) => response.json())
       .then((responsedata) => {
         setProducts(responsedata.data);
-        // console.log("Data produk:", responsedata.data);
       })
       .catch((error) => {
         console.error("Error fetching produk:", error);
@@ -31,17 +24,21 @@ const kategori = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Daftar Produk</h1>
-      {products.map((products: ProductType) => (
-        <div key={products.id}>
-          <h2>{products.name}</h2>
-          <p>price: {products.price}</p>
-          <p>size: {products.size}</p>
-        </div>
-      ))}
+    <div className={styles.container}>
+      <h1 className={styles.title}>Daftar Produk</h1>
+
+      <div className={styles.productGrid}>
+        {products.map((product) => (
+          <div key={product.id} className={styles.card}>
+            <h2 className={styles.name}>{product.name}</h2>
+            <p className={styles.price}>Rp {product.price}</p>
+            <p className={styles.info}>Size: {product.size}</p>
+            <p className={styles.info}>Category: {product.category}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default kategori;
+export default Kategori;
