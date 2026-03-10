@@ -1,13 +1,17 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import TampilanProduk from "../views/produk";
 
-// const fetcher = (url: string) => fetch(url).then((res) => res.json());
+type ProductType = {
+  id: string;
+  name: string;
+  price: number;
+  size: string;
+};
 const kategori = () => {
   // const [isLogin, setIsLogin] = useState(false);
   // const { push } = useRouter();
   const [products, setProducts] = useState([]);
-  // console.log("products:", products);
+  console.log("products:", products);
   // useEffect(() => {
   //   if (!isLogin) {
   //     push("/auth/login");
@@ -19,7 +23,7 @@ const kategori = () => {
       .then((response) => response.json())
       .then((responsedata) => {
         setProducts(responsedata.data);
-        // console.log("Data produk:", responsedata.data);
+        console.log("Data produk:", responsedata.data);
       })
       .catch((error) => {
         console.error("Error fetching produk:", error);
@@ -28,7 +32,14 @@ const kategori = () => {
 
   return (
     <div>
-      <TampilanProduk products={products} />
+      <h1>Daftar Produk</h1>
+      {products.map((products: ProductType) => (
+        <div key={products.id}>
+          <h2>{products.name}</h2>
+          <p>Harga: {products.price}</p>
+          <p>Ukuran: {products.size}</p>
+        </div>
+      ))}
     </div>
   );
 };
