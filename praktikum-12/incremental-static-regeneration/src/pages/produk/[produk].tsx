@@ -8,23 +8,23 @@ const HalamanProduk = ({ product }: { product: ProductType }) => {
   {
     /Digunakan client-side rendering/;
   }
-  // const { query } = useRouter();
-  // const { data, error, isLoading } = useSWR(
-  //   `/api/produk/${query.produk}`,
-  //   fetcher,
-  // );
-
-  // return (
-  //   <div>
-  //     <DetailProduk products={isLoading ? [] : data.data} />
-  //   </div>
-  // );
+  const { query } = useRouter();
+  const { data, error, isLoading } = useSWR(
+    `/api/produk/${query.produk}`,
+    fetcher,
+  );
 
   return (
     <div>
-      <DetailProduk products={product} />
+      <DetailProduk products={isLoading ? [] : data.data} />
     </div>
   );
+
+  // return (
+  //   <div>
+  //     <DetailProduk products={product} />
+  //   </div>
+  // );
 };
 
 export default HalamanProduk;
@@ -32,19 +32,19 @@ export default HalamanProduk;
 {
   /Digunakan server-side rendering/;
 }
-export async function getServerSideProps({
-  params,
-}: {
-  params: { produk: string };
-}) {
-  const res = await fetch(`http://localhost:3000/api/produk/${params?.produk}`);
-  const respone = await res.json();
-  return {
-    props: {
-      product: respone.data,
-    },
-  };
-}
+// export async function getServerSideProps({
+//   params,
+// }: {
+//   params: { produk: string };
+// }) {
+//   const res = await fetch(`http://localhost:3000/api/produk/${params?.produk}`);
+//   const respone = await res.json();
+//   return {
+//     props: {
+//       product: respone.data,
+//     },
+//   };
+// }
 
 {
   /Digunakan static-side generation/;

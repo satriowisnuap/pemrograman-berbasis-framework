@@ -1,0 +1,140 @@
+.produk {
+  width: 100%;
+  padding: 40px 5%;
+
+  &__title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(3, 280px);
+    justify-content: center;
+    gap: 24px;
+
+    /* Skeleton Loading */
+    &__skeleton {
+      flex: 1 1 250px;
+      max-width: 280px;
+      padding: 16px;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      background: #fff;
+
+      display: flex;
+      flex-direction: column;
+
+      animation: skeletonLoading 1.5s infinite ease-in-out;
+
+      &__image {
+        width: 100%;
+        height: 200px;
+        background-color: #e0e0e0;
+        border-radius: 6px;
+        margin-bottom: 14px;
+      }
+
+      &__name {
+        width: 80%;
+        height: 20px;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+
+      &__category {
+        width: 60%;
+        height: 16px;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+
+      &__price {
+        width: 40%;
+        height: 18px;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+      }
+    }
+
+    /* Card Produk */
+    &__item {
+      flex: 1 1 250px;
+      max-width: 280px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid #eee;
+
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+
+      transition: all 0.25s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      &__image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 6px;
+        margin-bottom: 14px;
+        background: #f5f5f5;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+      }
+
+      &:hover &__image img {
+        transform: scale(1.05);
+      }
+
+      &__name {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        line-height: 1.3;
+      }
+
+      &__category {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+
+      &__price {
+        font-size: 17px;
+        color: #ff5722;
+        font-weight: 700;
+        margin-top: auto;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@keyframes skeletonLoading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
