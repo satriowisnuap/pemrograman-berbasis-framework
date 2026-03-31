@@ -47,7 +47,7 @@ export default HalamanProduk;
 // }
 
 {
-  /Digunakan static-side rendering/;
+  /Digunakan static-side generation/;
 }
 export async function getStaticPaths() {
   const res = await fetch(`http://localhost:3000/api/produk`);
