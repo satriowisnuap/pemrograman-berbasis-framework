@@ -69,10 +69,13 @@
     }
   }
 
-  &__error {
+  .register__error {
     color: red;
+    background: #ffe5e5;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
     font-size: 14px;
-    margin-top: 8px;
   }
 }
 
