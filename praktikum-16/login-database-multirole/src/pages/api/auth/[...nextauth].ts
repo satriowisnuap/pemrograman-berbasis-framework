@@ -26,7 +26,6 @@ export const authOptions: NextAuthOptions = {
             credentials.password,
             user.password,
           );
-
           if (isPasswordValid) {
             // Pastikan mengembalikan object user yang bersih
             return {
@@ -49,9 +48,7 @@ export const authOptions: NextAuthOptions = {
         token.fullname = user.fullname;
         token.role = user.role;
       }
-
       //  console.log("jwt callback", { token, account, profile, user })
-      
       return token;
     },
     async session({ session, token }: any) {
@@ -64,9 +61,7 @@ export const authOptions: NextAuthOptions = {
       if (token.role) {
         session.user.role = token.role;
       }
-
       // console.log("session callback", { session, token })
-
       return session;
     },
   },
