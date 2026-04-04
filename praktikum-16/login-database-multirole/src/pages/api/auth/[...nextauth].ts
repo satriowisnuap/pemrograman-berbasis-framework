@@ -26,6 +26,7 @@ export const authOptions: NextAuthOptions = {
             credentials.password,
             user.password,
           );
+
           if (isPasswordValid) {
             // Pastikan mengembalikan object user yang bersih
             return {
