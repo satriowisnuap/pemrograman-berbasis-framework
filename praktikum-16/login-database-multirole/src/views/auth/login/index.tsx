@@ -1,40 +1,97 @@
 import Link from "next/link";
+import style from "../../auth/login/login.module.scss";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import styles from "./login.module.scss";
+import { signIn } from "next-auth/react";
 
-const TampilanLogin = () => {
-  const { push } = useRouter();
+const Tampilanlogin = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { push, query } = useRouter();
 
-  const handleLogin = () => {
-    // sementara (mock login)
-    push("/produk");
+  const callbackUrl: any = query.callbackUrl || "/";
+  const [error, setError] = useState("");
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: event.target.email.value,
+        password: event.target.password.value,
+        callbackUrl,
+      });
+
+      // console.log("signIn response:", res);
+      if (!res?.error) {
+        setIsLoading(false);
+        push(callbackUrl);
+      } else {
+        setIsLoading(false);
+        setError("Login failed");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      setError("Wrong email or password");
+    }
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>Welcome Back 👋</h1>
-        <p className={styles.subtitle}>Silakan login untuk melanjutkan</p>
+    <>
+      <div className={style.login}>
+        {error && <p className={style.login__error}>{error}</p>}
+        <h1 className={style.login__title}>Halaman login</h1>
+        <div className={style.login__form}>
+          <form onSubmit={handleSubmit}>
+            <div className={style.login__form__item}>
+              <label htmlFor="email" className={style.login__form__item__label}>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+                className={style.login__form__item__input}
+              />
+            </div>
 
-        <input type="email" placeholder="Email" className={styles.input} />
-        <input
-          type="password"
-          placeholder="Password"
-          className={styles.input}
-        />
-
-        <button onClick={handleLogin} className={styles.button}>
-          Login
-        </button>
-
-        <p className={styles.registerText}>Belum punya akun?</p>
-
-        <Link href="/auth/register" className={styles.link}>
-          Daftar di sini
-        </Link>
+            <div className={style.login__form__item}>
+              <label
+                htmlFor="Password"
+                className={style.login__form__item__label}
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                minLength={6}
+                required
+                placeholder="password"
+                className={style.login__form__item__input}
+              />
+            </div>
+            <button
+              type="submit"
+              className={style.login__form__item__button}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "login"}
+            </button>
+          </form>
+          <br />
+          <p className={style.login__form__item__text}>
+            tidak punya {" "} akun?{" "}
+            <Link href="/auth/register">Ke Halaman Register</Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default TampilanLogin;
+export default Tampilanlogin;
