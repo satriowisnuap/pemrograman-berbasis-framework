@@ -14,7 +14,11 @@ export default function Home() {
       <Head>
         <title>Praktikum Next.js</title>
       </Head>
-      <h1>Praktikum Sistem Autentikasi & Proteksi</h1> <br />
+      <h1>
+        Praktikum Implementasi Login Google Provider dengan NextAuth.js +
+        Firebase{" "}
+      </h1>{" "}
+      <br />
       <p>Satrio Wisnu Adi Pratama</p> <br />
       <p>Mahasiswa D4 Pengembangan Web</p>
     </div>

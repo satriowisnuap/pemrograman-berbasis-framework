@@ -8,6 +8,7 @@ import {
   query,
   addDoc,
   where,
+  updateDoc,
 } from "firebase/firestore";
 import app from "./firebase";
 import bcrypt from "bcrypt";
@@ -73,10 +74,7 @@ export async function signUp(
     });
   } else {
     userData.password = await bcrypt.hash(userData.password, 10);
-
-    // Set default role menjadi member
-    userData.role = userData.role || "member";
-
+    userData.role = "user";
     await addDoc(collection(db, "users"), userData)
       .then(() => {
         callback({
@@ -90,5 +88,46 @@ export async function signUp(
           message: error.message,
         });
       });
+  }
+}
+
+export async function signInWithGoogle(userData: any, callback: any) {
+  try {
+    const q = query(
+      collection(db, "users"),
+      where("email", "==", userData.email),
+    );
+
+    const querySnapshot = await getDocs(q);
+    const data: any = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    if (data.length > 0) {
+      // User sudah ada, update data
+      userData.role = data[0].role;
+      await updateDoc(doc(db, "users", data[0].id), userData);
+      callback({
+        status: true,
+        message: "User registered and logged in with Google",
+        data: userData,
+      });
+    } else {
+      // User baru, tambah data
+      userData.role = "member";
+      await addDoc(collection(db, "users"), userData);
+      callback({
+        status: true,
+        message: "User registered and logged in with Google",
+        data: userData,
+      });
+    }
+  } catch (error: any) {
+    // Tangani error di sini
+    callback({
+      status: false,
+      message: "Failed to register user with Google",
+    });
   }
 }
