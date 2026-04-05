@@ -14,7 +14,6 @@ const Tampilanlogin = () => {
     event.preventDefault();
     setError("");
     setIsLoading(true);
-
     try {
       const res = await signIn("credentials", {
         redirect: false,
@@ -33,7 +32,7 @@ const Tampilanlogin = () => {
       }
     } catch (error) {
       setIsLoading(false);
-      setError("Wrong email or password");
+      setError("wrong email or password");
     }
   };
 
@@ -53,11 +52,9 @@ const Tampilanlogin = () => {
                 id="email"
                 name="email"
                 placeholder="Email"
-                required
                 className={style.login__form__item__input}
               />
             </div>
-
             <div className={style.login__form__item}>
               <label
                 htmlFor="Password"
@@ -69,8 +66,6 @@ const Tampilanlogin = () => {
                 type="password"
                 id="password"
                 name="password"
-                minLength={6}
-                required
                 placeholder="password"
                 className={style.login__form__item__input}
               />
@@ -81,11 +76,19 @@ const Tampilanlogin = () => {
               disabled={isLoading}
             >
               {isLoading ? "Loading..." : "login"}
+            </button>{" "}
+            <br /> <br />
+            <button
+              onClick={() => signIn("google", { callbackUrl, redirect: false })}
+              className={style.login__form__item__button}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "sign in with google"}
             </button>
           </form>
           <br />
           <p className={style.login__form__item__text}>
-            tidak punya {" "} akun?{" "}
+            tidak punya {"'"} akun?{" "}
             <Link href="/auth/register">Ke Halaman Register</Link>
           </p>
         </div>
