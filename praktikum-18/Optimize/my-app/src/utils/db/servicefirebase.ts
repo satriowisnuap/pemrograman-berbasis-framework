@@ -29,6 +29,13 @@ export async function retrieveDataByID(collectionName: string, id: string) {
   const data = snapshot.data();
   return data;
 }
+
+export async function retrieveProductById(collectionName: string, id: string) {
+  const snapshot = await getDoc(doc(db, collectionName, id));
+  const data = snapshot.data();
+  return data;
+}
+
 export async function signIn(email: string) {
   const q = query(collection(db, "users"), where("email", "==", email));
   const querySnapshot = await getDocs(q);
@@ -120,8 +127,8 @@ export async function signInWithGoogle(userData: any, callback: any) {
       // Set default role menjadi member
       // userData.role = userData.role || "member";
 
-      // Menambahkan role editor 
-       userData.role = userData.role || "editor";
+      // Menambahkan role editor
+      userData.role = userData.role || "editor";
 
       await addDoc(collection(db, "users"), userData);
       callback({
@@ -164,7 +171,7 @@ export async function signInWithGithub(userData: any, callback: any) {
       });
     } else {
       // User baru → tambah data
-      userData.role = userData.role || "member"; 
+      userData.role = userData.role || "member";
 
       await addDoc(collection(db, "users"), userData);
 
