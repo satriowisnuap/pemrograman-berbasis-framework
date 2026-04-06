@@ -19,6 +19,11 @@ const nextConfig = {
         hostname: "www.skatetilldeath.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/**",
+      },
     ],
   },
 };
