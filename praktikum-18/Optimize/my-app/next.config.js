@@ -6,6 +6,16 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "brothersarms.co.za",
         pathname: "/**",
       },
@@ -17,11 +27,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "www.skatetilldeath.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
         pathname: "/**",
       },
     ],

@@ -27,8 +27,8 @@ const kategori = () => {
   //       console.error("Error fetching produk:", error);
   //     });
   // }, []);
-  
-  const { data, error,isLoading } = useSWR("/api/produk", fetcher);
+
+  const { data, error, isLoading } = useSWR("/api/produk", fetcher);
   //cek apakah data, error, dan isLoading sudah benar
   // console.log("data:", data);
   // console.log("error:", error);

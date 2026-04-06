@@ -1,9 +1,12 @@
-import { useRouter } from "next/router";
 import Navbar from "../navbar";
+import { useRouter } from "next/router";
 import { Roboto } from "next/font/google";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
-// const Navbar = dynamic(() => import("../navbar"));
+// const Navbar = dynamic(() => import("../navbar"), {
+//   loading: () => <p>Loading Navbar...</p>,
+//   ssr: false,
+// });
 
 const disableNavbar = ["/auth/login", "/auth/register", "/404"];
 
