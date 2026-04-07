@@ -3,6 +3,7 @@ import styles from "./about.module.scss";
 export default function About() {
   return (
     <div className={styles.container}>
+      <h1 data-testid="title">About Page</h1>
       <div className={styles.card}>
         <div className={styles.header}>
           <h1>About Me 👨‍💻</h1>
